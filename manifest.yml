@@ -1,8 +1,18 @@
 applications:
-- name: mc
+- name: minecraft-server
+  mem: 1G
   path: minecraft_server.1.8.1.jar
+  services:
+    minecraft-server-port:
+      type: harbor
+    world-data:
+      type: filesystem
   stackato:
     hooks:
       pre-staging:
       - wget https://s3.amazonaws.com/Minecraft.Download/versions/1.8.1/minecraft_server.1.8.1.jar
       - echo eula=true >> eula.txt
+      pre-running:
+      # Move the minecraft world to the Fileystem for storage
+      - mkdir -p $STACKATO_FILESYSTEM/world
+      - ln -s $STACKATO_FILESYSTEM/world world
