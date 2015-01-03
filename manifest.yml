@@ -1,7 +1,6 @@
 applications:
 - name: minecraft-server
   mem: 1G
-  path: minecraft_server.1.8.1.jar
   services:
     minecraft-server-port:
       type: harbor
@@ -11,8 +10,11 @@ applications:
     hooks:
       pre-staging:
       - wget https://s3.amazonaws.com/Minecraft.Download/versions/1.8.1/minecraft_server.1.8.1.jar
-      - echo eula=true >> eula.txt
-      pre-running:
+      post-staging:
       # Move the minecraft world to the Fileystem for storage
       - mkdir -p $STACKATO_FILESYSTEM/world
       - ln -s $STACKATO_FILESYSTEM/world world
+      pre-running:
+      # Sets Harbor's port as server-port
+      - ruby update_server_properties.rb
+      - java -Xmx1024M -Xms1024M -jar minecraft_server.1.8.1.jar nogui &
