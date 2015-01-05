@@ -16,5 +16,5 @@ applications:
       - ln -s $STACKATO_FILESYSTEM/world world
       pre-running:
       # Sets Harbor's port as server-port
-      - ruby update_server_properties.rb
+      - sh update_server_properties.sh
       - java -Xmx1024M -Xms1024M -jar minecraft_server.1.8.1.jar nogui &

@@ -16,12 +16,15 @@ def minecraft_server_app(environ, start_response):
 
     # retrieve the STACKATO_SERVICES environment variable as a JSON object
     stackato_services = json.loads(os.environ['STACKATO_SERVICES'])
+  
+    # retrieve the VCAP_APPLICATION environment variable as a JSON object
+    vcap_application = json.loads(os.environ['VCAP_APPLICATION'])
     
     # retrieve the external port number from STACKATO SERVICES
     external_port = str(stackato_services['minecraft-server-port']['port'])
     
-    # retrieve the hostname from STACKATO_SERVICES
-    hostname = str(stackato_services['minecraft-server-port']['hostname'])
+    # retrieve the hostname from VCAP_APPLICATION
+    hostname = str(vcap_application['application_uris'][0])
 
     # Print the connection details (hostname:port)
     return ['Connect to the Minecraft server at ' + hostname + ':' + external_port + '. Happy crafting!']
