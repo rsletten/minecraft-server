@@ -1,6 +1,6 @@
 applications:
 - name: minecraft-server
-  mem: 1G
+  memory: 1G
   services:
     minecraft-server-port:
       type: harbor
