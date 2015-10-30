@@ -1,12 +1,12 @@
 # Minecraft Server
 
-This application is used to demonstrate Stackato's Harbor and FileSystem services.
+This application is used to demonstrate HPE Helion Stackato's Harbor and FileSystem services.
 
 When this application starts running, the latest Minecraft server is retrieved and starts running. A WSGI web application reads the environment variables from the session, and displays the connection string for the Minecraft client in the webapp.
 
 Minecraft server's world data is persistent, held by FileSystem's services. Harbor is used to provision a TCP port to the Minecraft server.
 
-## Deploying to Stackato
+## Deploying to HPE Helion Stackato
 
     stackato push -n
 
