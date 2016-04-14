@@ -9,7 +9,7 @@ applications:
   stackato:
     hooks:
       pre-staging:
-      - wget https://s3.amazonaws.com/Minecraft.Download/versions/1.8.1/minecraft_server.1.8.1.jar
+      - wget https://s3.amazonaws.com/Minecraft.Download/versions/1.9.2/minecraft_server.1.9.2.jar
       post-staging:
       # Move the minecraft world to the Fileystem for storage
       - mkdir -p $STACKATO_FILESYSTEM/world
@@ -17,4 +17,4 @@ applications:
       pre-running:
       # Sets Harbor's port as server-port
       - sh update_server_properties.sh
-      - java -Xmx1024M -Xms1024M -jar minecraft_server.1.8.1.jar nogui &
+      - java -Xmx1024M -Xms1024M -jar minecraft_server.1.9.2.jar nogui &
